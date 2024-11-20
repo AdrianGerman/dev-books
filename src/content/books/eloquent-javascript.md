@@ -1,5 +1,5 @@
 ---
-title: eloquent javascript
+title: Eloquent JavaScript
 author: Marijn Haverbeke
 img: eloquent-js.jpg
 pages: 472
