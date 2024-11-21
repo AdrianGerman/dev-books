@@ -25,13 +25,13 @@ const { Content } = await render(book)
   <div class="flex gap-12">
     <aside class="flex flex-col items-center gap-4">
       <a href="/" class="hover:underline opacity-70">← Volver atrás</a>
-
       <img
         transition:name={`img-${slug}`}
         class="rounded w-96 h-auto"
         src={`/${img}`}
         alt={title}
       />
+      <span class="text-sm" id="score"></span>
       {
         SHOW_BUY_BUTTON && (
           <a
@@ -57,3 +57,17 @@ const { Content } = await render(book)
     </main>
   </div>
 </Layout>
+
+<script>
+  import { SCORE_API_ENDPOINT } from "astro:env/client"
+
+  const scoreElement = document.querySelector("#score")
+
+  fetch(SCORE_API_ENDPOINT)
+    .then((res) => res.text())
+    .then((scoreValue) => {
+      if (scoreElement) {
+        scoreElement.innerHTML = `⭐ Puntuación: ${scoreValue.trim()}/5`
+      }
+    })
+</script>
