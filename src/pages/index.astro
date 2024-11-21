@@ -27,6 +27,7 @@ console.log(books)
                     class="mb-2 xl:mb-0 transition hover:scale-110"
                   >
                     <img
+                      transition:name={`img-${slug}`}
                       src={`/${img}`}
                       alt={title}
                       class="rounded-lg mr-5 w-48"
@@ -34,7 +35,10 @@ console.log(books)
                   </a>
 
                   <div class="flex flex-col justify-center">
-                    <h2 class="mb-2 text-2xl font-bold leading-tight text-white">
+                    <h2
+                      transition:name={`title-${slug}`}
+                      class="mb-2 text-2xl font-bold leading-tight text-white"
+                    >
                       {title}
                     </h2>
 
