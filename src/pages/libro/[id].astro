@@ -4,6 +4,7 @@ import { SHOW_BUY_BUTTON } from "astro:env/server"
 import Layout from "../../layouts/Layout.astro"
 
 import AmazonLogo from "../../components/AmazonLogo.astro"
+import BookScore from "../../components/BookScore.astro"
 
 export async function getStaticPaths() {
   const books = await getCollection("books")
@@ -31,7 +32,8 @@ const { Content } = await render(book)
         src={`/${img}`}
         alt={title}
       />
-      <span class="text-sm" id="score"></span>
+      <BookScore />
+      >
       {
         SHOW_BUY_BUTTON && (
           <a
@@ -57,17 +59,3 @@ const { Content } = await render(book)
     </main>
   </div>
 </Layout>
-
-<script>
-  import { SCORE_API_ENDPOINT } from "astro:env/client"
-
-  const scoreElement = document.querySelector("#score")
-
-  fetch(SCORE_API_ENDPOINT)
-    .then((res) => res.text())
-    .then((scoreValue) => {
-      if (scoreElement) {
-        scoreElement.innerHTML = `⭐ Puntuación: ${scoreValue.trim()}/5`
-      }
-    })
-</script>
