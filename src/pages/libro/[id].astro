@@ -3,8 +3,8 @@ import { getCollection, render } from "astro:content"
 import { SHOW_BUY_BUTTON } from "astro:env/server"
 import Layout from "../../layouts/Layout.astro"
 
-import AmazonLogo from "../../components/AmazonLogo.astro"
 import BookScore from "../../components/BookScore.astro"
+import BuyButton from "../../components/BuyButton.astro"
 
 export async function getStaticPaths() {
   const books = await getCollection("books")
@@ -39,20 +39,7 @@ export const prerender = true
           >Cargando puntuación...</span
         >
       </BookScore>
-      {
-        SHOW_BUY_BUTTON && (
-          <a
-            href={buy.mx}
-            title="Comprar libro"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="text-balance inline-flex gap-2 items-center bg-yellow-400 hover:bg-yellow-500 active:bg-yellow-600 text-black font-bold py-2 px-4 rounded-lg border border-yellow-500 transition duration-200 ease-in-out hover:scale-105 justify-center text-center"
-          >
-            Comprar en Amazon
-            <AmazonLogo />
-          </a>
-        )
-      }
+      {SHOW_BUY_BUTTON && <BuyButton server:defer buy={buy} />}
     </aside>
     <main class="max-w-2xl">
       <h1 transition:name={`title-${slug}`} class="text-4xl font-bold mb-4">
