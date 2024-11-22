@@ -20,6 +20,8 @@ const { data, slug } = book
 const { title, author, img, pages, description, read, buy } = data
 
 const { Content } = await render(book)
+
+export const prerender = true
 ---
 
 <Layout title={`${title}`}>
@@ -32,8 +34,11 @@ const { Content } = await render(book)
         src={`/${img}`}
         alt={title}
       />
-      <BookScore />
-      >
+      <BookScore server:defer id={slug}>
+        <span slot="fallback" class="text-sm opacity-70"
+          >Cargando puntuación...</span
+        >
+      </BookScore>
       {
         SHOW_BUY_BUTTON && (
           <a
