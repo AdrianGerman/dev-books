@@ -5,6 +5,7 @@ import Layout from "../../layouts/Layout.astro"
 
 import BookScore from "../../components/BookScore.astro"
 import BuyButton from "../../components/BuyButton.astro"
+import ReadButton from "../../components/ReadButton.astro"
 
 export async function getStaticPaths() {
   const books = await getCollection("books")
@@ -47,6 +48,9 @@ export const prerender = true
       </h1>
       <div class="prose prose-invert">
         <Content />
+      </div>
+      <div class="py-8">
+        <ReadButton read={read} />
       </div>
     </main>
   </div>
